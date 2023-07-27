@@ -1,13 +1,42 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@mui/material';
+import { FormControl, TextField} from '@mui/material'
+import "../stylesheets/Login.css"
 
 function Login() {
+  const [data, setData] = useState({})
+
+  const handleChange =(event, type)=>{
+    setData((prevValues)=>{
+      return {
+        ...prevValues,
+        [type]: event.target.value
+      }
+    })
+  }
+  console.log(data,'<<<<<<<<<<<<<<<<<<<<,woho')
   return (
     <div className='login-page-container'>
         <Box >
       <Card variant="outlined">
       <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+      <FormControl>
+      <TextField
+          onChange={e=>handleChange(e, 'email')}
+          label="Email"
+          variant="filled"
+          className='login-email'
+        />
+          <TextField
+          onChange={e=>handleChange(e, 'password')}
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          variant="filled"
+          className='login-password'
+        />
+</FormControl>
+      {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
         Word of the Day
       </Typography>
       <Typography variant="h5" component="div">
@@ -20,10 +49,11 @@ function Login() {
         well meaning and kindly.
         <br />
         {'"a benevolent smile"'}
-      </Typography>
+      </Typography> */}
     </CardContent>
+
     <CardActions>
-      <Button size="small">Learn More</Button>
+      <Button size="small">Login</Button>
     </CardActions>
       </Card>
     </Box>
